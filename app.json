@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "afisha-utmn",
+    "name": "Афиша ТюмГУ",
     "slug": "afisha-utmn",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -21,10 +21,16 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.klepter.afishautmn"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "7b177ffb-d6c7-4489-9fc5-4b797d84b213"
+      }
     }
   }
 }

@@ -20,7 +20,7 @@ export default function Header({children}) {
 
 const styles = StyleSheet.create({
     header: {
-        marginTop: Constants.statusBarHeight,
+        // marginTop: Constants.statusBarHeight,
         height: 55,
     },
     linearGradient: {
