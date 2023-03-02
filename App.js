@@ -1,20 +1,51 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import {contextProvider} from "./src/context/contextProvider";
+import AuthContext from "./src/context/context";
+import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
+import {NavigationContainer} from "@react-navigation/native";
+import Home from "./src/screens/Home";
+import Followings from "./src/screens/user/Followings";
+import UserEvents from "./src/screens/user/UserEvents";
+import UserProfile from "./src/screens/user/UserProfile";
+import CreateEvent from "./src/screens/organizer/CreateEvent";
+import OrganizerEvents from "./src/screens/organizer/OrganizerEvents";
+import OrganizerProfile from "./src/screens/organizer/OrganizerProfile";
+import TabIcons from "./src/ui/tabicons/TabIcons";
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+    const {user, accessToken, loading, login, logout, refresh, userType} = contextProvider();
+    const TabNavigator = createBottomTabNavigator();
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+    return (
+        <AuthContext.Provider value={
+            {user, accessToken, loading, login, logout, refresh, userType}
+        }>
+            <NavigationContainer>
+                <TabNavigator.Navigator screenOptions={({route}) => ({
+                    tabBarIcon: ({focused, color, size}) => {
+                        return <TabIcons name={route.name} focused={ focused }/>
+                    },
+                    headerShown: false,
+                    tabBarOptions: {
+                        showIcon: true
+                    }
+                })
+                }>
+                    <TabNavigator.Screen name="Главная" component={Home}/>
+                    {
+                        (userType === 'user') ?
+                            <>
+                                <TabNavigator.Screen name="Подписки" component={Followings}/>
+                                <TabNavigator.Screen name="Записи" component={UserEvents}/>
+                                <TabNavigator.Screen name="Профиль" component={UserProfile}/>
+                            </> :
+                            <>
+                                <TabNavigator.Screen name="Создать" component={CreateEvent}/>
+                                <TabNavigator.Screen name="Ваши мероприятия" component={OrganizerEvents}/>
+                                <TabNavigator.Screen name="Профиль" component={OrganizerProfile}/>
+                            </>
+                    }
+                </TabNavigator.Navigator>
+            </NavigationContainer>
+        </AuthContext.Provider>
+    );
+}
