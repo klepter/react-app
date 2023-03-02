@@ -10,6 +10,7 @@ import CreateEvent from "./src/screens/organizer/CreateEvent";
 import OrganizerEvents from "./src/screens/organizer/OrganizerEvents";
 import OrganizerProfile from "./src/screens/organizer/OrganizerProfile";
 import TabIcons from "./src/ui/tabicons/TabIcons";
+import {StatusBar} from "react-native";
 
 export default function App() {
     const {user, accessToken, loading, login, logout, refresh, userType} = contextProvider();
@@ -19,6 +20,7 @@ export default function App() {
         <AuthContext.Provider value={
             {user, accessToken, loading, login, logout, refresh, userType}
         }>
+            <StatusBar barStyle='default' />
             <NavigationContainer>
                 <TabNavigator.Navigator screenOptions={({route}) => ({
                     tabBarIcon: ({focused, color, size}) => {

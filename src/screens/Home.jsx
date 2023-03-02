@@ -102,7 +102,7 @@ export default function Home() {
             <Header>
                 <SearchField/>
             </Header>
-            <Layout style={{marginBottom: 80}}>
+            <Layout style={{marginBottom: 55}}>
                 {/*<View style={[styles.homeCard, styles.cardGap, styles.borderBottom]}>*/}
                 {/*    <Text style={styles.cardTitle}>Важные мероприятия</Text>*/}
                 {/*</View>*/}
@@ -122,7 +122,6 @@ export default function Home() {
                 </View>
             </Layout>
         </>
-
     );
 }
 
